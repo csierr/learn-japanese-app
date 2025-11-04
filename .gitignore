@@ -25,9 +25,10 @@ dist-ssr
 
 # Local files
 unused/
+README_2.md
 
 # Python backend
 backend/venv/
 backend/__pycache__/
 backend/*.pyc
-backend/.env
+.env
