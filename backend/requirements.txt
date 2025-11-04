@@ -1,3 +1,5 @@
-fastapi
-uvicorn[standard]
-python-dotenv
+fastapi==0.121.0
+uvicorn[standard]==0.38.0
+python-dotenv==1.2.1
+deepl==1.23.0
+pykakasi==2.3.0
