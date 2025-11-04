@@ -8,6 +8,7 @@ import libraryBg from "@/assets/library-bg.jpg";
 export const TextTranslator = () => {
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
+  const [romajiText, setRomajiText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleTranslate = async () => {
@@ -15,6 +16,7 @@ export const TextTranslator = () => {
     
     setIsLoading(true);
     setTranslatedText("");
+    setRomajiText("");
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/translate", {
@@ -31,6 +33,7 @@ export const TextTranslator = () => {
 
       const data = await response.json();
       setTranslatedText(data.translatedText);
+      setRomajiText(data.romajiText);
     } catch (error) {
       console.error("Failed to translate:", error);
       setTranslatedText("Failed to translate. Please try again.");
@@ -68,7 +71,7 @@ export const TextTranslator = () => {
         <Card className="p-8 backdrop-blur-sm bg-card/80 border-2 border-primary/20 shadow-[0_8px_30px_hsl(351_100%_86%/0.2)]">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="text-sm font-medium mb-2 block">English</label>
+              <label className="text-sm font-medium mb-2 block">Your language</label>
               <Textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -81,7 +84,10 @@ export const TextTranslator = () => {
               <label className="text-sm font-medium mb-2 block">日本語 (Japanese)</label>
               <div className="min-h-[200px] px-3 py-2 rounded-md bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-primary/20">
                 {translatedText ? (
-                  <p className="text-lg leading-relaxed">{translatedText}</p>
+                  <>
+                    <p className="text-sm leading-normal">{translatedText}</p>
+                    <p className="text-sm text-muted-foreground italic mt-2">{romajiText}</p>
+                  </>
                 ) : (
                   <p className="text-sm text-muted-foreground">Translation will appear here...</p>
                 )}

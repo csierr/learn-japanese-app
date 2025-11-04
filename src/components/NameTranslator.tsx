@@ -8,18 +8,38 @@ import calligraphyBg from "@/assets/calligraphy-bg.jpg";
 export const NameTranslator = () => {
   const [name, setName] = useState("");
   const [translatedName, setTranslatedName] = useState("");
+  const [romajiName, setRomajiName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleTranslate = async () => {
     if (!name.trim()) return;
     
     setIsLoading(true);
-    // TODO: Connect to your backend endpoint
-    // For now, showing a placeholder
-    setTimeout(() => {
-      setTranslatedName("カタカナ変換待ち"); // Placeholder
+    setTranslatedName("");
+    setRomajiName("");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/name_translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: name }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setTranslatedName(data.translatedName);
+      setRomajiName(data.romajiName);
+    } catch (error) {
+      console.error("Failed to translate name:", error);
+      setTranslatedName("Translation failed.");
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
   return (
@@ -71,9 +91,10 @@ export const NameTranslator = () => {
             </Button>
 
             {translatedName && (
-              <div className="p-6 rounded-lg bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-primary/20 animate-in fade-in duration-500">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-primary/20 animate-in fade-in duration-500 text-center">
                 <p className="text-sm text-muted-foreground mb-2">Your name in Japanese:</p>
-                <p className="text-4xl font-bold text-center py-4">{translatedName}</p>
+                <p className="text-4xl font-bold py-2">{translatedName}</p>
+                <p className="text-muted-foreground italic">{romajiName}</p>
               </div>
             )}
           </div>
