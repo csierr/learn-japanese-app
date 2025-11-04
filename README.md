@@ -1,4 +1,4 @@
-# Learning Japanese App
+# [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&pause=1000&color=F796A0&vCenter=true&width=435&lines=Learning+Japanese+App+%F0%9F%8C%B8)](https://git.io/typing-svg)
 
 Welcome to the Learning Japanese App! This is a full-stack web application designed to help users learn and interact with the Japanese language, born from my personal journey as a Chilean learning Japanese.
 
