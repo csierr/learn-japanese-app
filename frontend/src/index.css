@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Sakura pink and oriental theme */
+    --background: 40 30% 97%;
+    --foreground: 220 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Sakura pink primary */
+    --primary: 351 100% 86%;
+    --primary-foreground: 220 30% 15%;
+
+    /* Deep crimson secondary */
+    --secondary: 0 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Gold accent */
+    --accent: 45 90% 60%;
+    --accent-foreground: 220 30% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 351 30% 88%;
+    --input: 351 30% 88%;
+    --ring: 351 100% 86%;
+
+    --radius: 0.75rem;
+    
+    /* Custom oriental tokens */
+    --sakura-light: 351 100% 92%;
+    --sakura-glow: 351 100% 86%;
+    --temple-red: 0 70% 45%;
+    --gold-accent: 45 90% 60%;
+    --cream: 40 30% 97%;
+    
+    /* Gradients */
+    --gradient-sakura: linear-gradient(135deg, hsl(351 100% 86%), hsl(351 80% 75%));
+    --gradient-temple: linear-gradient(135deg, hsl(0 70% 45%), hsl(0 60% 35%));
+    --gradient-hero: linear-gradient(180deg, hsl(351 100% 95%), hsl(40 30% 97%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(351 100% 86% / 0.15);
+    --shadow-elegant: 0 8px 30px hsl(351 100% 86% / 0.2);
+    
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 40 30% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 40 30% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 40 30% 95%;
+
+    --primary: 351 100% 86%;
+    --primary-foreground: 220 30% 15%;
+
+    --secondary: 0 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 40 15% 65%;
+
+    --accent: 45 90% 60%;
+    --accent-foreground: 220 30% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 351 100% 86%;
+    
+    --sakura-light: 351 80% 25%;
+    --sakura-glow: 351 100% 86%;
+    --temple-red: 0 70% 45%;
+    --gold-accent: 45 90% 60%;
+    --cream: 220 30% 8%;
+    
+    --gradient-sakura: linear-gradient(135deg, hsl(351 100% 86%), hsl(351 80% 75%));
+    --gradient-temple: linear-gradient(135deg, hsl(0 70% 45%), hsl(0 60% 35%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 30% 12%), hsl(220 30% 8%));
+    
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-elegant: 0 8px 30px hsl(0 0% 0% / 0.4);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(-10%) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(110vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float linear infinite;
+}
+
+/* Hide scrollbar while keeping functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
