@@ -6,7 +6,7 @@ const navItems = [
   { label: "Home", value: "home" },
   { label: "Name Translator", value: "name-translator" },
   { label: "Text Translator", value: "text-translator" },
-  { label: "Study Places", value: "study-places" },
+  { label: "Study", value: "study" },
   { label: "Message Wall", value: "message-wall" },
 ];
 

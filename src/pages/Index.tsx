@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NameTranslator } from "@/components/NameTranslator";
 import { TextTranslator } from "@/components/TextTranslator";
-import { StudyPlaces } from "@/components/StudyPlaces";
+import { StudyResources } from "@/components/StudyResources";
 import { MessageWall } from "@/components/MessageWall";
 import { Header } from "@/components/Header";
 import { CatMascot } from "@/components/CatMascot";
@@ -158,9 +158,9 @@ const Index = () => {
           <TextTranslator />
         </TabsContent>
 
-        {/* Study Places Tab */}
-        <TabsContent value="study-places" className="mt-0">
-          <StudyPlaces />
+        {/* Study Tab */}
+        <TabsContent value="study" className="mt-0">
+          <StudyResources />
         </TabsContent>
 
         {/* Message Wall Tab */}
