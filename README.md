@@ -46,7 +46,7 @@ The application uses a single table, `messages`, to store posts from the message
 
 The project can be run using Docker (recommended) or by setting up the frontend and backend environments locally.
 
-### Using Docker
+### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=380&height=30&lines=Using+Docker)](https://git.io/typing-svg)
 
 This method handles all dependencies and networking automatically.
 
@@ -82,7 +82,9 @@ docker compose up --build
 
 The application will be available at `http://localhost:8080`.
 
-### Running Locally (Without Docker)
+<br>
+
+### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=500&height=30&lines=Running+Locally+(Without+Docker))](https://git.io/typing-svg)
 
 This method requires you set up separate environments for the frontend, backend, and a local PostgreSQL database.
 
