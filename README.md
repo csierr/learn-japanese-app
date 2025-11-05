@@ -4,7 +4,7 @@ Welcome to the Learning Japanese App! This is a full-stack web application desig
 
 As I delved into the language, I found the process both fulfilling and challenging. I built this app to share that excitement, and provide a platform for others on a similar path.
 
-## Features
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Features)](https://git.io/typing-svg)
 
 -   **Name Translator**: Translates your name into Katakana, the Japanese script for foreign words, and provides the Romaji pronunciation.
 -   **Text Translator**: Translates phrases and texts from the language of your preference (according to DeepL support hehe) to Japanese with Romaji transcription.
@@ -12,7 +12,7 @@ As I delved into the language, I found the process both fulfilling and challengi
 -   **Message Wall**: An interactive wall where users can post and view messages, with data persisted in a PostgreSQL database.
 -   **Fully Containerized**: The entire application is containerized with Docker for easy setup and deployment.
 
-## Tech Stack
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Tech+Stack)](https://git.io/typing-svg)
 
 -   **Frontend**: React, Vite, TypeScript, Tailwind CSS
 -   **Backend**: Python, FastAPI
@@ -24,7 +24,7 @@ As I delved into the language, I found the process both fulfilling and challengi
     -   **Translation**: [DeepL API](https://www.deepl.com/pro-api) (currently using the free tier).
     -   **Romaji Conversion**: `pykakasi` for converting Japanese script to phonetic Romaji.
 
-## Architecture Overview
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Architecture+Overview)](https://git.io/typing-svg)
 
 The project uses a decoupled, multi-container architecture orchestrated by Docker Compose.
 
@@ -33,7 +33,7 @@ The project uses a decoupled, multi-container architecture orchestrated by Docke
 -   **Database**: A PostgreSQL container that stores all data for the application, such as messages from the message wall.
 -   **Nginx as a Reverse Proxy**: To solve cross-origin (CORS) issues and simplify networking, Nginx acts as a reverse proxy. All traffic from the browser goes to Nginx. It serves the frontend files directly and forwards any requests starting with `/api/` to the backend container.
 
-## Database Schema
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Database+Schema)](https://git.io/typing-svg)
 
 The application uses a single table, `messages`, to store posts from the message wall. The schema is defined using SQLAlchemy in `database/model.py`.
 
@@ -42,7 +42,7 @@ The application uses a single table, `messages`, to store posts from the message
 -   `message` (String): The content of the message, limited to 280 characters.
 -   `created_at` (DateTime): A timestamp automatically set to the time of creation (in UTC).
 
-## Getting Started
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Getting+Started)](https://git.io/typing-svg)
 
 The project can be run using Docker (recommended) or by setting up the frontend and backend environments locally.
 
@@ -134,12 +134,12 @@ npm run dev
 
 The frontend will be available at `http://localhost:8080` (or another port if 5173 is busy). The `vite.config.ts` is pre-configured to proxy API requests to the backend at port 8000.
 
-## Notes on APIs and Libraries
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Notes+on+APIs+and+Libraries)](https://git.io/typing-svg)
 
 -   **DeepL API**: This project relies on the DeepL API for translations. The free tier has a monthly character limit.
 -   **`pykakasi`**: This library provides the Romaji conversion. While effective for many cases, it may have limitations. I am currently exploring more alternatives for better accuracy.
 
-## 🔮 Future Plans
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Future+Plans+%F0%9F%94%AE)](https://git.io/typing-svg)
 
 The project is a work in progress! Here are some features I'm currently working on:
 
