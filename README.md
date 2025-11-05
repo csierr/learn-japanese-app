@@ -50,12 +50,12 @@ The project can be run using Docker (recommended) or by setting up the frontend 
 
 This method handles all dependencies and networking automatically.
 
-#### Prerequisites
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=1.)](https://git.io/typing-svg) Prerequisites
 
 -   [Docker](https://www.docker.com/get-started) & Docker Compose
 -   A DeepL API Key (the free tier is sufficient)
 
-#### 1. Environment Variables
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=2.)](https://git.io/typing-svg) Environment Variables
 
 The backend requires environment variables for the DeepL API and the database connection.
 
@@ -70,7 +70,7 @@ The backend requires environment variables for the DeepL API and the database co
     DATABASE_URL="postgresql://your_user:your_password@db:5432/learning_japanese_db"
     ```
 
-#### 2. Build and Run
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=3.)](https://git.io/typing-svg) Build and Run
 
 From the project's root directory, run:
 
@@ -80,19 +80,18 @@ docker compose up --build
 
 The application will be available at `http://localhost:8080`.
 
-<br>
 
 ### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=500&height=30&lines=Running+Locally+(Without+Docker))](https://git.io/typing-svg)
 
 This method requires you set up separate environments for the frontend, backend, and a local PostgreSQL database.
 
-#### Prerequisites
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=1.)](https://git.io/typing-svg) Prerequisites
 
 -   [Node.js](https://nodejs.org/) (v18 or newer)
 -   [Python](https://www.python.org/) (v3.10 or newer) and `pip`
 -   A running local instance of [PostgreSQL](https://www.postgresql.org/download/).
 
-#### 1. Backend Setup
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=2.)](https://git.io/typing-svg) Backend Setup
 
 In a terminal:
 
@@ -117,7 +116,7 @@ uvicorn main:app --reload
 
 The backend will be running on `http://localhost:8000`.
 
-#### 2. Frontend Setup
+#### [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=16&duration=500&color=F796A0&center=true&vCenter=true&repeat=false&width=18&height=14&lines=3.)](https://git.io/typing-svg) Frontend Setup
 
 In a **new** terminal:
 
