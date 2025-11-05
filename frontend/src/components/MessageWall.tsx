@@ -1,37 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import sakuraLakeBg from "@/assets/sakura-lake-bg.jpg";
+import wallBg from "@/assets/sakura-lake-bg.jpg";
 
 interface Message {
   id: string;
   name: string;
   message: string;
-  timestamp: Date;
+  created_at: string;
 }
 
-// Mock messages for demonstration
-const initialMessages: Message[] = [
-  { id: "1", name: "Maria", message: "Learning Japanese has been my dream! This site is amazing 🌸", timestamp: new Date() },
-  { id: "2", name: "Anonymous", message: "頑張ってください! (Ganbatte kudasai!)", timestamp: new Date() },
-  { id: "3", name: "Carlos", message: "Can't wait to visit Japan someday!", timestamp: new Date() },
-];
-
 export const MessageWall = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [newName, setNewName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch("/api/messages");
+      if (response.ok) {
+        const data = await response.json();
+        setMessages(data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!message.trim()) {
+    if (!newMessage.trim()) {
       toast({
         title: "Message required",
         description: "Please write a message before posting.",
@@ -40,36 +48,39 @@ export const MessageWall = () => {
       return;
     }
 
-    if (message.length > 200) {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newName, message: newMessage }),
+      });
+
+      if (response.ok) {
+        setNewMessage("");
+        // Keep name for convenience
+        fetchMessages(); // Refresh messages
+        toast({
+          title: "Message posted! 🌸",
+          description: "Your message has been added to the wall.",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to post message. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Failed to post message:", error);
       toast({
-        title: "Message too long",
-        description: "Please keep your message under 200 characters.",
+        title: "Error",
+        description: "An error occurred while posting your message.",
         variant: "destructive",
       });
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsSubmitting(true);
-    
-    // TODO: Connect to your backend endpoint
-    // For now, adding locally
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      name: name.trim() || "Anonymous",
-      message: message.trim(),
-      timestamp: new Date(),
-    };
-
-    setMessages([newMessage, ...messages]);
-    setName("");
-    setMessage("");
-    
-    toast({
-      title: "Message posted! 🌸",
-      description: "Your message has been added to the wall.",
-    });
-    
-    setIsSubmitting(false);
   };
 
   // Rotate messages slightly for a more organic look
@@ -83,8 +94,8 @@ export const MessageWall = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src={sakuraLakeBg}
-          alt="Sakura lake scenery"
+          src={wallBg}
+          alt="Message wall"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
@@ -110,11 +121,12 @@ export const MessageWall = () => {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium mb-2 block">
-                    Your Name <span className="text-muted-foreground">(optional)</span>
+                    Your Name{" "}
+                    <span className="text-muted-foreground">(optional)</span>
                   </label>
                   <Input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
                     placeholder="Leave blank for anonymous"
                     maxLength={50}
                     className="border-2 border-primary/30 focus:border-primary"
@@ -125,31 +137,31 @@ export const MessageWall = () => {
                     Your Message
                   </label>
                   <Textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Write your message here... (max 200 characters)"
-                    maxLength={200}
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Write your message here... (max 280 characters)"
+                    maxLength={280}
                     className="resize-none border-2 border-primary/30 focus:border-primary"
                     rows={3}
                   />
                   <p className="text-xs text-muted-foreground mt-1">
-                    {message.length}/200 characters
+                    {newMessage.length}/280 characters
                   </p>
                 </div>
               </div>
               <Button
                 type="submit"
-                disabled={isSubmitting || !message.trim()}
+                disabled={isLoading || !newMessage.trim()}
                 size="lg"
                 className="w-full md:w-auto"
               >
-                {isSubmitting ? "Posting..." : "Post Message"}
+                {isLoading ? "Posting..." : "Post Message"}
               </Button>
             </form>
           </Card>
 
           {/* Messages Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] overflow-y-auto p-4 scroll-smooth scrollbar-hide">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {messages.map((msg, index) => (
               <div
                 key={msg.id}
@@ -162,15 +174,18 @@ export const MessageWall = () => {
                 <Card
                   className="p-6 bg-yellow-100 dark:bg-yellow-200 border-none shadow-[4px_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[6px_6px_12px_rgba(0,0,0,0.15)] transition-all duration-200 hover:scale-105 min-h-[180px] flex flex-col"
                   style={{
-                    fontFamily: "'Indie Flower', cursive, sans-serif",
+                    fontFamily: "'Indie Flower', cursive",
                   }}
                 >
                   <p className="text-gray-800 text-base mb-4 flex-1 leading-relaxed">
                     {msg.message}
                   </p>
-                  <div className="pt-3 border-t border-gray-400/30">
+                  <div className="pt-3 border-t border-gray-400/30 text-right">
                     <p className="text-sm font-medium text-gray-700">
                       — {msg.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {new Date(msg.created_at).toLocaleDateString()}
                     </p>
                   </div>
                 </Card>

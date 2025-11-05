@@ -3,3 +3,5 @@ uvicorn[standard]==0.38.0
 python-dotenv==1.2.1
 deepl==1.23.0
 pykakasi==2.3.0
+SQLAlchemy==2.0.44
+psycopg2-binary==2.9.11

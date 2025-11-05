@@ -19,7 +19,8 @@ export const TextTranslator = () => {
     setRomajiText("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/translate", {
+      const apiUrl = ""; // Use relative path for API calls
+      const response = await fetch(`${apiUrl}/api/translate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

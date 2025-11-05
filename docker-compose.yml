@@ -1,0 +1,40 @@
+services:
+    backend-jap-app:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+        env_file:
+            - ./backend/.env
+        networks:
+            - jap-network
+        depends_on:
+            - db
+    frontend-jap-app:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        depends_on:
+            - backend-jap-app
+        networks:
+            - jap-network
+    db:
+        image: postgres:15-alpine
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        env_file:
+            - ./backend/.env
+        networks:
+            - jap-network
+        ports:
+            - "5432:5432"
+
+networks:
+    jap-network:
+        driver: bridge
+
+volumes:
+    postgres_data:
