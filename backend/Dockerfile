@@ -7,17 +7,15 @@ WORKDIR /app
 # Copy the dependencies file to the working directory
 COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt
-# Use --no-cache-dir to reduce image size and upgrade pip
+# Install any needed packages specified in requirements.txt (--no-cache-dir to reduce image size and upgrade pip)
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code (e.g., main.py)
+# Copy rest of the application code
 COPY . .
 
-# Expose the port the app runs on
+# Expose port the app runs on
 EXPOSE 8000
 
-# Define the command to run the app
-# Use 0.0.0.0 to make it accessible from outside the container
+# Command to run the app (0.0.0.0 to make it accessible from outside the container)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

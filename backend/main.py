@@ -40,23 +40,35 @@ class MessageRequest(BaseModel):
 
 @app.post("/api/translate")
 async def translate_text(request: TranslationRequest):
+    """
+    Endpoint to translate general text to Japanese and provide Romaji.
+    """
     result = deepl_client.translate_text(request.text, target_lang="JA")
     romaji_text = conv.do(result.text)
     return {"translatedText": f"{result.text}", "romajiText": romaji_text}
 
 @app.post("/api/name_translate")
 async def translate_name(request: TranslationRequest):
+    """
+    Endpoint to translate names to Japanese and provide Romaji.
+    """
     result = deepl_client.translate_text(request.text, target_lang="JA")
     romaji_name = conv.do(result.text)
     return {"translatedName": f"{result.text}", "romajiName": romaji_name}
 
 @app.get("/api/messages")
 async def get_all_messages(db: Session = Depends(handler.get_db)):
+    """
+    Endpoint to retrieve all messages.
+    """
     messages = handler.get_messages(db, limit=20)
     return messages
 
 @app.post("/api/messages")
 async def create_new_message(request: MessageRequest, db: Session = Depends(handler.get_db)):
+    """
+    Endpoint to create a new message.
+    """
     message = handler.create_message(db=db, name=request.name, message=request.message)
     return message
 

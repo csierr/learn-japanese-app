@@ -7,16 +7,16 @@ RUN npm install
 
 COPY . .
 
-# Build the application for production. No API URL needed anymore.
+# Build app
 RUN npm run build
 
 ### STAGE 2: Serve ###
 FROM nginx:stable-alpine
 
-# Copy the built static files from the builder stage
+# Copy built static files from builder stage (/app/dist originated from npm run build)
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy our custom Nginx configuration
+# Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

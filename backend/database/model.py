@@ -6,6 +6,9 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class Message(Base):
+    """
+    Message model for storing user messages for the Message Wall component
+    """
     __tablename__ = "messages"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)

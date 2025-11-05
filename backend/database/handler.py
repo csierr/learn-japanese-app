@@ -7,10 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL)
+engine       = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():
+    """
+    Dependency to get DB session
+    """
     db = SessionLocal()
     try:
         yield db
@@ -18,9 +21,12 @@ def get_db():
         db.close()
 
 def init_db():
+    """
+    Initialize the database and create tables if they don't exist
+    """
     Base.metadata.create_all(bind=engine)
     
-    # Add an initial message if the table is empty
+    # Initial message if table is empty
     db = SessionLocal()
     if db.query(Message).count() == 0:
         initial_message = Message(
@@ -33,6 +39,9 @@ def init_db():
 
 # CRUD Operations
 def create_message(db, name: str, message: str):
+    """
+    Create a new message in the database
+    """
     if not name or not name.strip():
         name = "Anonymous"
     db_message = Message(name=name, message=message)
@@ -42,9 +51,15 @@ def create_message(db, name: str, message: str):
     return db_message
 
 def get_messages(db, limit: int = 10):
+    """
+    Retrieve messages from the database
+    """
     return db.query(Message).order_by(desc(Message.created_at)).limit(limit).all()
 
 def delete_message(db, message_id):
+    """
+    Delete a message from the database
+    """
     db_message = db.query(Message).filter(Message.id == message_id).first()
     if db_message:
         db.delete(db_message)
