@@ -131,7 +131,7 @@ npm install
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:8080` (or another port if 5173 is busy). The `vite.config.ts` is pre-configured to proxy API requests to the backend at port 8000.
+The frontend will be available at `http://localhost:8080`. The `vite.config.ts` is pre-configured to proxy API requests to the backend at port 8000.
 
 ## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Notes+on+APIs+and+Libraries)](https://git.io/typing-svg)
 
