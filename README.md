@@ -62,14 +62,12 @@ The backend requires environment variables for the DeepL API and the database co
 1.  Navigate to the `backend/` directory.
 2.  Create a `.env` file by copying the example: `cp .env.example .env` (or just create the file manually).
 3.  Open the `.env` file and ensure it contains all the required keys:
-    ```
+    ```.env
     DEEPL_API_KEY="your_secret_deepl_api_key"
-
-    # PostgreSQL Database Configuration
-    POSTGRES_USER=user
-    POSTGRES_PASSWORD=password
+    POSTGRES_USER=your_user
+    POSTGRES_PASSWORD=your_password
     POSTGRES_DB=learning_japanese_db
-    DATABASE_URL="postgresql://user:password@db:5432/learning_japanese_db"
+    DATABASE_URL="postgresql://your_user:your_password@db:5432/learning_japanese_db"
     ```
 
 #### 2. Build and Run
