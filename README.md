@@ -133,14 +133,20 @@ npm run dev
 
 The frontend will be available at `http://localhost:5173`. The `vite.config.ts` is pre-configured to proxy API requests to the backend at port 8000.
 
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Deployment+%F0%9F%9A%80)](https://git.io/typing-svg)
+
+This project is configured for public deployment on cloud services like AWS. A complete, step-by-step guide for deploying the application using Docker and Cloudflare Tunnel is available in the `deployment` directory.
+
+For detailed instructions, please see the **[Deployment Guide](./deployment/README.md)**.
+
+
 ## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Notes+on+APIs+and+Libraries)](https://git.io/typing-svg)
 
 -   **DeepL API**: This project relies on the DeepL API for translations. The free tier has a monthly character limit.
 -   **`pykakasi`**: This library provides the Romaji conversion. While effective for many cases, it may have limitations. I am currently exploring more alternatives for better accuracy.
 
-## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=Future+Plans+%F0%9F%94%AE)](https://git.io/typing-svg)
+## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Source+Code+Pro&weight=500&size=25&color=F796A0&vCenter=true&repeat=false&width=435&lines=App+in+Action)](https://git.io/typing-svg)
 
-The project is a work in progress! Here are some features I'm currently working on:
+Below is a screenshot of the app running locally:
 
--   **Deployment**: Host the application on a cloud service so it's publicly accessible.
--   **Enhanced Romaji**: Integrate a more advanced Romaji conversion tool.
+![alt text](image.png)
