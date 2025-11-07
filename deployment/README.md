@@ -56,37 +56,37 @@ First, I created a virtual machine on AWS to host the application.
 1.  **Connect via SSH**:
     - Find the **Public IPv4 address** of the instance in the EC2 dashboard.
     - In your terminal and use the following command, replacing the placeholders with your key pair path and instance IP.
-    ```bash
-    ssh -i /path/to/your-key-pair.pem ec2-user@your_public_ip_address
-    ```
+        ```bash
+        ssh -i /path/to/your-key-pair.pem ec2-user@your_public_ip_address
+        ```
 
 2.  **Install Dependencies**:
     - Once connected, run the following commands to update the server and install Docker.
-    ```bash
-    # Update all packages
-    sudo dnf update -y
-
-    # Install Docker
-    sudo dnf install docker -y
-
-    # Start the Docker service
-    sudo systemctl start docker
-
-    # Add the ec2-user to the 'docker' group to run docker commands without sudo
-    sudo usermod -aG docker ec2-user
-
-    # Log out and log back in for the group change to take effect
-    exit
-    ```
+        ```bash
+        # Update all packages
+        sudo dnf update -y
+    
+        # Install Docker
+        sudo dnf install docker -y
+    
+        # Start the Docker service
+        sudo systemctl start docker
+    
+        # Add the ec2-user to the 'docker' group to run docker commands without sudo
+        sudo usermod -aG docker ec2-user
+    
+        # Log out and log back in for the group change to take effect
+        exit
+        ```
     - After exiting, **reconnect using the same `ssh` command**.
 
 3.  **Clone the Project**:
     - Install Git and clone the repository.
-    ```bash
-    sudo dnf install git -y
-    git clone https://github.com/your-username/learning-japanese-app.git
-    cd learning-japanese-app
-    ```
+        ```bash
+        sudo dnf install git -y
+        git clone https://github.com/your-username/learning-japanese-app.git
+        cd learning-japanese-app
+        ```
 
 ## Step 3: Cloudflare Tunnel Configuration
 
@@ -107,15 +107,15 @@ I used a Cloudflare Tunnel to expose the application to the internet through a c
 3.  **Update `docker-compose.yml`**:
     - On your EC2 instance, open the `docker-compose.yml` file.
     - Replace the placeholder `"your_token_here"` in the `cloudflare` service with the actual token you just copied.
-    ```yaml
-    # deployment/docker-compose.yml
-    # ...
-    cloudflare:
-        container_name: cloudflare-jap-app
-        image: cloudflare/cloudflared:latest
-        command: ["tunnel", "--no-autoupdate", "run", "--token", "ey...your...long...token...here...=="]
-    # ...
-    ```
+        ```yaml
+        # deployment/docker-compose.yml
+        # ...
+        cloudflare:
+            container_name: cloudflare-jap-app
+            image: cloudflare/cloudflared:latest
+            command: ["tunnel", "--no-autoupdate", "run", "--token", "ey...your...long...token...here...=="]
+        # ...
+        ```
 
 4.  **Route Traffic to Your App**:
     - Back in the Cloudflare dashboard, proceed to the next step ("Route traffic").
@@ -130,27 +130,27 @@ I used a Cloudflare Tunnel to expose the application to the internet through a c
 
 1.  **Create Environment Files**:
     - Create the necessary `.env` files for the backend and frontend with the specific configurations (API keys, database credentials, etc.).
-    ```bash
-    # In the project root directory
-    nano backend/.env
-    nano frontend/.env
-    ```
+        ```bash
+        # In the project root directory
+        nano backend/.env
+        nano frontend/.env
+        ```
 
 2.  **Build and Run the Application**:
     - From the project's root directory on tthe EC2 instance, run the following commands:
-    ```bash
-    # Build the images based on the Dockerfiles
-    docker compose -f docker-compose.yml build
-
-    # Start all services in detached mode
-    docker compose -f docker-compose.yml up -d
-    ```
+        ```bash
+        # Build the images based on the Dockerfiles
+        docker compose -f docker-compose.yml build
+    
+        # Start all services in detached mode
+        docker compose -f docker-compose.yml up -d
+        ```
 
 3.  **Verify the Deployment**:
     - Check that all containers are running correctly.
-    ```bash
-    docker ps
-    ```
+        ```bash
+        docker ps
+        ```
     - You should see four containers running: `backend-jap-app`, `frontend-jap-app`, `db`, and `cloudflare-jap-app`.
 
 You can now access the application by visiting the public hostname you configured in Cloudflare (e.g., `https://my-app.mydomain.com`).
