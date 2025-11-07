@@ -2,7 +2,7 @@
 
 These are step-by-step instructions of how I deployed the app to an AWS EC2 instance using Docker Compose and exposed it to the web securely with a Cloudflare Tunnel.
 
-## About This Deployment Configuration
+## About
 
 This directory contains modified configuration files specifically for deployment. The original files in the project's root and `/backend` directories are intended for local development.
 
@@ -41,11 +41,11 @@ First, I created a virtual machine on AWS to host the application.
     - In "Network settings", click "Edit".
     - Configure the **Inbound security groups rules** to allow traffic on the following ports:
 
-| Type  | Protocol | Port Range | Source      | Description                  |
-| :---- | :------- | :--------- | :---------- | :--------------------------- |
-| SSH   | TCP      | 22         | `0.0.0.0/0` | For SSH access to the server |
-| HTTP  | TCP      | 80         | `0.0.0.0/0` | For standard web traffic     |
-| HTTPS | TCP      | 443        | `0.0.0.0/0` | For secure web traffic       |
+        | Type  | Protocol | Port Range | Source      | Description                  |
+        | :---- | :------- | :--------- | :---------- | :--------------------------- |
+        | SSH   | TCP      | 22         | `0.0.0.0/0` | For SSH access to the server |
+        | HTTP  | TCP      | 80         | `0.0.0.0/0` | For standard web traffic     |
+        | HTTPS | TCP      | 443        | `0.0.0.0/0` | For secure web traffic       |
 
 
 4.  **Launch the Instance**:
